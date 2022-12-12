@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Online Compiler</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="header"> Online Compiler</div>
+<div class="control-panel">
+    Select Language:
+    &nbsp; &nbsp;
+    <select id="languages" class="languages" onchange="changeLanguage()">
+        <option value="php"> PHP </option>
+        <option value="python"> Python </option>
+        <option value="C"> C</option>
+        <option value="cpp"> C++ </option>
+
+    </select>
+</div>
+<div class="editor" id="editor"></div>
+
+
+<div class="button-container">
+    <button class="btn" onclick="executeCode()"> Run! </button>
+    
+    <button class = "btn"onclick="save()">Save.</button>
+</div>
+
+<div class="output"></div>
+<script>
+    async function save(){
+    const vall = editor.getSession().getValue();
+    
+    
+    
+    const element= document.createElement("a")
+    
+    const  blob1= new Blob([vall],{type:"text"})
+    
+    
+    
+    const fileHandle = await window.showSaveFilePicker();
+    const fileStrean = await fileHandle.createWritable();
+
+    await fileStrean.write(blob1);
+    await fileStrean.close(); 
+    } 
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/lib/ace.js"></script>
+<script src="js/lib/theme-terminal.js"></script>
+<script src="js/ide.js"></script>
+
+</body>
+</html>
